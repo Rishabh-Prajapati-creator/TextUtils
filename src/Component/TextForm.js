@@ -2,6 +2,8 @@ import React,{useState} from 'react'
 
 
 export default function TextForm(props) {
+
+  
   const [text,setText]=useState('');
 
   const handleOnChange=(event)=>{
@@ -50,26 +52,26 @@ export default function TextForm(props) {
   return (
     <>
     <div className='container' style={{color:props.mode==='dark'?'white':'black'}}>
-      <h1  >{props.heading}</h1>
-<div class="mb-3">
-  <label for="exampleFormControlTextarea1" className="form-label">Example textarea</label>
-  <textarea className="form-control" style={{backgroundColor:props.mode==='dark'?'grey':'white',color:props.mode==='dark'?'white':'black'}} id="exampleFormControlTextarea1" rows="5" value={text} onChange={handleOnChange} ></textarea>
+      <h1 className='my-2 mb-4' >{props.heading}</h1>
+<div className="mb-3">
+ 
+  <textarea className="form-control" style={{backgroundColor:props.mode==='dark'?'#13466e':'white',color:props.mode==='dark'?'white':'black'}} id="exampleFormControlTextarea1" rows="5" value={text} onChange={handleOnChange} ></textarea>
 </div>
 
-<button className='btn btn-primary mx-2' onClick={handleUpClick} >Conver to upperCase</button>
-<button className='btn btn-primary mx-2' onClick={handleLoClick} >Conver to LowerCase</button>
-<button className='btn btn-primary mx-2' onClick={speak} >Speak</button>
-<button className='btn btn-primary mx-2' onClick={copy} >Copy</button>
-<button className='btn btn-primary mx-2' onClick={clear} >Clear</button>
-<button className='btn btn-primary mx-2' onClick={handleExtraSpaces} >Remove Extra Space</button>
+<button disabled={text.length === 0} className='btn btn-primary mx-1 my-1' onClick={handleUpClick} >Conver to upperCase</button>
+<button disabled={text.length === 0} className='btn btn-primary mx-1 my-1' onClick={handleLoClick} >Conver to LowerCase</button>
+<button disabled={text.length === 0} className='btn btn-primary mx-1 my-1' onClick={speak} >Speak</button>
+<button disabled={text.length === 0} className='btn btn-primary mx-1 my-1' onClick={copy} >Copy</button>
+<button disabled={text.length === 0} className='btn btn-primary mx-1 my-1' onClick={clear} >Clear</button>
+<button disabled={text.length === 0} className='btn btn-primary mx-1 my-1' onClick={handleExtraSpaces} >Remove Extra Space</button>
 
     </div>
     <div className="container my-3" style={{color:props.mode==='dark'?'white':'black'}}>
       <h2>Your test summary</h2>
-      <p>{text.split(" ").length - 1} words and {text.length} characters</p>
-      <p>{0.008 * text.split(" ").length} Minutes read</p>
+      <p>{text.split(/\s+/).filter((element)=>{return element.length!==0}).length} words and {text.length} characters</p>
+      <p>{0.008 * text.split(" ").filter((element)=>{return element.length!==0}).length} Minutes read</p>
       <h3>Preview</h3>
-      <p>{text.length>0 ? text:"Enter something in the textbox above to preview it here"} </p>
+      <p>{text.length>0 ? text:"Nothing to preview"} </p>
     </div>
     </>
   )
